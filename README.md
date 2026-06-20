@@ -9,16 +9,16 @@ on the device), and a block-found climax overlay.
 > *The Elder Scrolls IV: Oblivion* — not affiliated with or endorsed by its
 > rights holders. See [License](#license).
 
-![Dagon mining screen](blog/img/dashboard.png)
+![Dagon mining screen](assets/img/dashboard.png)
 
 > **This is a fork** of [**shufps/ESP-Miner-NerdQAxePlus**](https://github.com/shufps/ESP-Miner-NerdQAxePlus).
 > All of the mining, stratum, and hardware-driver work is theirs. This fork adds
 > a custom display theme and a fix for a specific big-screen panel variant
 > (below). Licensed **GPLv3**, same as upstream — see [`LICENSE`](LICENSE).
 
-There is a write-up of how the theme was built (the color-space debugging, the
-sigil design) in [`blog/index.html`](blog/index.html). The **technical** build &
-recovery notes are in [`TROUBLESHOOTING.md`](TROUBLESHOOTING.md).
+From a bricked box to a custom, source-built altar — the brick, the color-space
+debugging, and every fix are written up in
+[`TROUBLESHOOTING.md`](TROUBLESHOOTING.md).
 
 ## What I ran into (short version)
 
@@ -74,6 +74,26 @@ Board target for this firmware: **`NERDQAXEPLUS2`** (deviceModel `NerdQAxe++`).
   solved; blocks count persists in NVS.
 
 The mining/pool/driver internals are unchanged from upstream.
+
+## Gallery
+
+![On the device — LORD DAGON](assets/img/device-lord-dagon.jpg)
+
+![Animated lava sigil (loops on the device)](assets/img/anim-lava.gif)
+
+![Block-found "SIGIL FOUND" climax](assets/img/altar-climax.png)
+
+## Overclocking
+
+The BM1370s have headroom. The firmware exposes the full safe frequency/voltage
+range so you can tune live from the web UI; the boot default stays conservative.
+
+| Setting | Value |
+| --- | --- |
+| Boot default | 600 MHz · 1150 mV · ~4.8 TH/s |
+| Exposed range | 500–800 MHz · 1100–1400 mV |
+| Stable overclock | 700 MHz · 1280 mV · ~5.7 TH/s · 0 rejects |
+| Cooling | PID auto-fan, 55 °C target · 70 °C cutoff |
 
 ---
 

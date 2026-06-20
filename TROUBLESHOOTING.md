@@ -1,8 +1,7 @@
 # Troubleshooting & build notes
 
 How this fork came to exist, what broke along the way, and how to recover if you
-break yours. This is the technical companion to the design write-up in
-[`blog/index.html`](blog/index.html).
+break yours.
 
 ---
 
@@ -141,6 +140,8 @@ Test with:
   is wrong (RGB vs BGR — fix `rgb_ele_order`).
 
 (`theme_build/testcard.png` is generated for exactly this.)
+
+![Grey ramp rendering as rainbow bands — the tell-tale of a wrong byte order](assets/img/color-grey-ramp.jpg)
 
 ### 4d. Panel quirk: don't use true black
 
