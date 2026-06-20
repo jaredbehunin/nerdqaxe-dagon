@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Summoning a Sigil — Turning a NerdQAxe++ into a Mehrunes Dagon Mining Altar</title>
+<style>
+  :root{
+    --obsidian:#0a0605; --panel:#140c0a; --panel2:#1b110d;
+    --molten:#ff7a1a; --ember:#ff4e00; --gold:#ffc45c; --blood:#c43412;
+    --ash:#b8a79c; --dim:#7a5d4f; --line:#3a211a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--obsidian); color:#e8dcd3;
+    font:17px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  .serif{font-family:Georgia,"Times New Roman",serif}
+  a{color:var(--gold)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+
+  header.hero{
+    position:relative; text-align:center; padding:90px 22px 70px;
+    background:
+      radial-gradient(120% 80% at 50% 120%, rgba(255,90,0,.40), rgba(196,32,0,.10) 45%, transparent 70%),
+      linear-gradient(180deg,#000 0%, #150b07 100%);
+    border-bottom:1px solid var(--line);
+  }
+  header.hero .kicker{letter-spacing:.45em;font-size:12px;color:var(--ash);text-transform:uppercase}
+  header.hero h1{
+    font-family:Georgia,serif; font-style:italic; font-weight:900;
+    font-size:clamp(34px,7vw,62px); margin:.25em 0 .15em; color:var(--gold);
+    text-shadow:0 0 26px rgba(255,90,0,.55);
+  }
+  header.hero p.sub{color:var(--ash);max-width:620px;margin:0 auto;font-size:18px}
+  .byline{margin-top:22px;color:var(--dim);font-size:14px;letter-spacing:.05em}
+
+  section{padding:46px 0;border-bottom:1px solid #1d120d}
+  h2{
+    font-family:Georgia,serif;font-weight:800;color:var(--gold);
+    font-size:clamp(24px,4.5vw,34px);margin:0 0 4px;
+  }
+  h2 .num{color:var(--ember);font-size:.6em;vertical-align:middle;margin-right:.5em;
+    font-family:monospace;letter-spacing:.1em}
+  h3{color:var(--molten);font-size:20px;margin:30px 0 6px}
+  p{margin:14px 0}
+  .lead{font-size:19px;color:#f0e6dd}
+  em{color:var(--gold);font-style:normal;font-weight:600}
+  code{background:#000;color:#ffb070;padding:1px 6px;border-radius:4px;font-size:.88em}
+
+  figure{margin:26px 0;text-align:center}
+  figure img{
+    max-width:100%;border-radius:10px;border:1px solid var(--line);
+    box-shadow:0 10px 40px rgba(0,0,0,.6), 0 0 30px rgba(255,80,0,.08);
+  }
+  figure.small img{max-width:420px}
+  figcaption{color:var(--dim);font-size:13.5px;margin-top:9px;font-style:italic}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid figure{margin:8px 0}
+  @media(max-width:620px){.grid{grid-template-columns:1fr}}
+
+  blockquote{
+    margin:24px 0;padding:14px 20px;border-left:3px solid var(--ember);
+    background:var(--panel);border-radius:0 8px 8px 0;color:var(--ash);font-style:italic;
+  }
+  .callout{
+    background:var(--panel2);border:1px solid var(--line);border-radius:10px;
+    padding:16px 20px;margin:22px 0;
+  }
+  .callout b{color:var(--gold)}
+
+  table.specs{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+  table.specs td,table.specs th{padding:9px 12px;border-bottom:1px solid #241510;text-align:left}
+  table.specs th{color:var(--gold);font-family:Georgia,serif}
+  table.specs td:first-child{color:var(--ash);width:42%}
+
+  footer{padding:50px 22px 70px;text-align:center;color:var(--dim)}
+  footer .sigil{color:var(--ember);font-size:26px}
+  hr.molten{border:none;height:1px;background:linear-gradient(90deg,transparent,var(--ember),transparent);margin:34px 0}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="kicker">Build Log</div>
+  <h1>Summoning a Sigil</h1>
+  <p class="sub">How a stock NerdQAxe++ Bitcoin miner — bricked, debugged, and rebuilt from source — became a living Mehrunes Dagon altar.</p>
+  <div class="byline">Hardware: NerdQAxe++ (4× BM1370) &nbsp;·&nbsp; 3.5″ 480×320 ST7796 &nbsp;·&nbsp; Custom ESP-Miner firmware</div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <p class="lead">It started as a small solo Bitcoin miner in a box and ended as a glowing Oblivion gate that streams molten lava, counts the hours it has spent in the abyss, and — should it ever beat astronomical odds — flares to life screaming <em>SIGIL FOUND</em>. This is the whole journey: every brick, every wrong color, and every line of custom firmware.</p>
+</section>
+
+<section>
+  <h2><span class="num">01</span>The box, and the brick</h2>
+  <p>The NerdQAxe++ is a desktop solo miner: four BM1370 ASICs, WiFi, a little color screen, and open-source <em>ESP-Miner</em> firmware running on an ESP32-S3. Out of the box it was already hashing — but it shipped on old firmware and was mining to the <em>previous owner's wallet</em>.</p>
+  <p>Step one was a firmware update. Step two was a mistake: uploading a <code>www.bin</code> web-assets package to a running device through the web UI. The screen went black, the device dropped off the network, and it was <em>bricked</em>.</p>
+  <blockquote>"well. it looks fucked.. thanks for that"</blockquote>
+  <p>Recovery meant going around the web UI entirely — straight to the silicon over USB with <code>esptool</code>. Hold BOOT, flash the complete factory image at <code>0x0</code>, erase the corrupted NVS, reflash clean. After a couple of frozen attempts and a full chip erase, the miner came back from the dead. Lesson learned, and a much better understanding of how the thing boots.</p>
+  <div class="callout"><b>Takeaway:</b> the web UI is a convenience layer. The real recovery path is the ESP32 ROM bootloader + esptool over USB-C. Once you can flash at <code>0x0</code>, nothing is permanently bricked.</div>
+</section>
+
+<section>
+  <h2><span class="num">02</span>The big-screen mystery</h2>
+  <p>With stock firmware restored, the display was <em>wrong</em>: tiny, off-center, mirrored. This particular unit is the "big screen" variant — a <em>3.5″ 480×320 ST7796</em> panel — but the stock firmware is built for the small 1.9″ 170×320 panel. The vendor never published their source; they only ship pre-built binaries.</p>
+  <p>So the only way forward was to build the firmware <em>from source</em> and teach it about the real panel: correct resolution (480×320), zero gap offset, fixed mirror axes, and eventually swapping in the proper ST7796 driver. A Docker-based ESP-IDF toolchain made the build reproducible.</p>
+  <figure class="small">
+    <img src="img/color-swatch.jpg" alt="Color test card on the panel">
+    <figcaption>First diagnostic: a flat color test card. Red and white look right… but green and blue are swapped. That was only half the story.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2><span class="num">03</span>The color gauntlet</h2>
+  <p>Getting the panel to show <em>correct colors</em> was the hardest part of the entire project — a three-layer bug that took real detective work and a lot of photos.</p>
+
+  <h3>Symptom 1: everything's blue</h3>
+  <p>The first themed build came up drenched in blue and purple, with pink and green text. A pure orange background was rendering as blue.</p>
+  <figure>
+    <img src="img/color-blue-bg.jpg" alt="Theme rendering with wrong blue/rainbow colors">
+    <figcaption>A molten-orange gradient rendering as concentric rainbow bands — the tell-tale sign of a byte-order problem, not a simple swap.</figcaption>
+  </figure>
+
+  <h3>The decisive test: a grey ramp</h3>
+  <p>Flat color blocks hide byte-order bugs (a constant value just becomes a different constant). The fix was to flash a diagnostic card with <em>gradients</em> — especially a black→white grey ramp. A smooth ramp showing rainbow stripes means the 16-bit pixel bytes are swapped.</p>
+  <div class="grid">
+    <figure><img src="img/color-grey-ramp.jpg" alt="Grey ramp showing rainbow banding"><figcaption>Grey ramp as rainbow stripes → byte order is wrong.</figcaption></figure>
+    <figure><img src="img/color-rb-swap.jpg" alt="Grey ramp smooth, red/blue swapped"><figcaption>After the byte-order fix: grey is smooth — but now red and blue are cleanly swapped.</figcaption></figure>
+  </div>
+  <p>The full diagnosis, layer by layer:</p>
+  <table class="specs">
+    <tr><th>Layer</th><th>Fix</th></tr>
+    <tr><td>16-bit byte order (rainbow gradients)</td><td><code>LV_COLOR_16_SWAP = 1</code> + big-endian image encoding</td></tr>
+    <tr><td>Red/Blue channel swap (BGR panel)</td><td><code>rgb_ele_order = BGR</code></td></tr>
+    <tr><td>Near-black banding / splotch</td><td>lift the black floor to ~<code>#100a0c</code></td></tr>
+  </table>
+  <p>With all three solved, the molten palette finally rendered the way it was designed:</p>
+  <figure>
+    <img src="img/color-fixed.jpg" alt="Correct molten colors on the panel">
+    <figcaption>Color solved. Deep obsidian, blood-red glow, gold title — exactly as intended.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2><span class="num">04</span>Designing the altar</h2>
+  <p>With the canvas working, the fun began. The brief: <em>Mehrunes Dagon</em> — the Elder Scrolls Daedric prince of destruction. Molten red and orange, Daedric runes, Oblivion fire.</p>
+  <p>The first pass was a procedural mockup — title, glowing hashrate, rune-framed stat panels — rendered at the exact 480×320 panel size so the layout could be judged before touching the device.</p>
+  <figure><img src="img/mockup-procedural.png" alt="First procedural Dagon mockup"><figcaption>Mockup v1 — procedural molten dashboard. Good bones, but it wanted real art.</figcaption></figure>
+
+  <h3>From a flat dashboard to a place</h3>
+  <p>A cinematic Oblivion deadlands scene became the next direction — black spires, a blood-red sun, rivers of lava — fitted to the screen with translucent panels so the stats stayed readable.</p>
+  <div class="grid">
+    <figure><img src="img/ref-lava-plains.png" alt="Lava plains reference art"><figcaption>Reference: the Oblivion deadlands.</figcaption></figure>
+    <figure><img src="img/theme-lavafields.png" alt="Lava fields theme preview"><figcaption>That scene as a working dashboard.</figcaption></figure>
+  </div>
+
+  <h3>The Sigil Stone</h3>
+  <p>Then the real idea landed: don't use a landscape — make the centerpiece a <em>living Sigil Stone</em>, the molten heart of an Oblivion gate, suspended on an obsidian altar with lava streaming through it.</p>
+  <div class="grid">
+    <figure><img src="img/ref-sigil-altar.png" alt="Sigil altar reference"><figcaption>The reference: a sigil-stone altar.</figcaption></figure>
+    <figure><img src="img/altar-idle.png" alt="Altar fitted to the panel"><figcaption>Fitted to 480×320 as the mining screen.</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">05</span>Bringing it to life</h2>
+  <p>A static altar is nice. A <em>burning</em> one is better. The screen is driven by LVGL, so the lava is real animation: a heat-masked flicker field scrolls <em>upward</em> through the central column, while the reflection on the wet floor below flickers <em>downward</em> — a mirrored fire, looping about once a second.</p>
+  <figure><img src="img/anim-lava.gif" alt="Animated lava loop"><figcaption>The looping lava — flames rising through the sigil. (Reflection runs the opposite direction on the device.)</figcaption></figure>
+  <div class="callout"><b>Constraint:</b> the ESP32-S3's flash partition is only 4&nbsp;MB. Full-screen video is impossible — the animation is a handful of pre-rendered frames over the lava column, cycled by LVGL. Every kilobyte was budgeted.</div>
+</section>
+
+<section>
+  <h2><span class="num">06</span>The dashboard</h2>
+  <p>The live data wraps the edges so the sigil stays clear in the center. Four themed gold corners — <em>hashrate, temperature, best difficulty, efficiency</em> — frame two plain digital readout columns: power / frequency / core-voltage on the left, accepted / rejected / blocks on the right.</p>
+  <figure><img src="img/dashboard.png" alt="Final dashboard layout"><figcaption>The finished layout — sigil center, stats on the perimeter.</figcaption></figure>
+  <p>And a custom flourish that doesn't exist in stock firmware: a persistent <em>TIME IN OBLIVION</em> counter — total lifetime mining time in years, days and hours — saved to the device's NVS so it survives reboots. The lifetime accepted-share count is persisted the same way (accumulated by delta, so pool reconnects never lose a share).</p>
+  <figure class="small"><img src="img/device-lord-dagon.jpg" alt="LORD DAGON on the real panel"><figcaption>On the real glass: LORD DAGON.</figcaption></figure>
+</section>
+
+<section>
+  <h2><span class="num">07</span>Overclocking</h2>
+  <p>The BM1370s have headroom. The firmware's frequency and voltage option lists were expanded to the full safe range so tuning could be done live from the browser, while the boot default stays conservative.</p>
+  <table class="specs">
+    <tr><th>Setting</th><th>Value</th></tr>
+    <tr><td>Stock / boot default</td><td>600 MHz · 1150 mV · ~4.8 TH/s</td></tr>
+    <tr><td>Exposed range</td><td>500–800 MHz · 1100–1400 mV</td></tr>
+    <tr><td>Running at (stable)</td><td>700 MHz · 1280 mV · ~5.7 TH/s · 0 rejects</td></tr>
+    <tr><td>Cooling</td><td>PID auto-fan @ 55 °C target · 70 °C cutoff</td></tr>
+  </table>
+  <p>Auto-fan keeps the chips around 55&nbsp;°C; at 700&nbsp;MHz the fan barely needs to work and rejected shares stay at zero — a clean, stable overclock.</p>
+</section>
+
+<section>
+  <h2><span class="num">08</span>SIGIL FOUND</h2>
+  <p>Solo mining is a lottery with astronomical odds. But <em>if</em> this altar ever solves a block, it earns a moment worthy of it: the whole screen erupts into the flared sigil, the orb blazing white-gold, with two words across it.</p>
+  <figure><img src="img/altar-climax.png" alt="SIGIL FOUND climax screen"><figcaption>The block-found climax — the orb flares and the scene floods with light.</figcaption></figure>
+  <figure class="small"><img src="img/anim-climax.gif" alt="Climax animation preview"><figcaption>Preview of the build-up: idle → swell → flash.</figcaption></figure>
+  <p>It stays up as a trophy until the device is rebooted — and the <em>BLOCKS</em> counter, written to permanent storage, ticks to <code>1</code> and stays there forever.</p>
+</section>
+
+<section>
+  <h2><span class="num">09</span>The final build</h2>
+  <p>From a bricked box to a fully custom, source-built mining altar:</p>
+  <table class="specs">
+    <tr><td>Panel fix</td><td>480×320 ST7796 driver, correct geometry &amp; color pipeline</td></tr>
+    <tr><td>Theme</td><td>Mehrunes Dagon sigil altar, hand-fitted to the panel</td></tr>
+    <tr><td>Animation</td><td>upward lava + downward floor reflection, looping</td></tr>
+    <tr><td>Custom data</td><td>TIME IN OBLIVION + lifetime accepted shares (NVS-persisted)</td></tr>
+    <tr><td>Boot</td><td>"SUMMONING THE SIGIL…" → solid load → stats fade in</td></tr>
+    <tr><td>Block event</td><td>full-screen SIGIL FOUND climax</td></tr>
+    <tr><td>Tuning</td><td>500–800 MHz range exposed, auto-fan + thermal cap</td></tr>
+  </table>
+  <p>It mines solo to its owner's wallet, stable and cool, and waits in the dark — counting its time in Oblivion.</p>
+</section>
+
+</div>
+
+<footer>
+  <div class="sigil">◆ ◈ ◆</div>
+  <p>Built end-to-end from a bricked NerdQAxe++ · ESP-Miner (NerdQAxePlus fork) · LVGL · ESP-IDF</p>
+</footer>
+
+</body>
+</html>
