@@ -124,13 +124,11 @@ The fuller upstream build/flash recipes (idf-shell, manual partition merge,
 
 ## Flash
 
-Easiest first-time flash is a **factory image** over USB. Incremental dev flashes
-just the app partition. Both — plus the **brick-recovery** procedure (the device
-drops to AP mode `NerdAxe_XXXX` / `192.168.4.1` after a full erase) — are
-documented step-by-step in [`TROUBLESHOOTING.md`](TROUBLESHOOTING.md).
-
-> Prebuilt binaries are attached to this repo's
-> [Releases](../../releases), not committed to the tree.
+No prebuilt binaries are published here — this repo is the source. Build it
+yourself (above), then flash over USB. First-time flashing, incremental app-only
+flashing, and the brick-recovery procedure (the device drops to AP mode
+`NerdAxe_XXXX` / `192.168.4.1` after a full erase) are documented step-by-step in
+[`TROUBLESHOOTING.md`](TROUBLESHOOTING.md).
 
 ---
 
