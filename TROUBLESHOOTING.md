@@ -150,7 +150,7 @@ dark areas.
 
 ---
 
-## 5. "Time in Oblivion" — persistent uptime
+## 5. Persistent uptime counter (the on-device `TIME IN OBLIVION` label)
 
 The lifetime uptime counter is stored in NVS so it survives reboots. Because a
 device can reconnect / reset its session counter, the value is **delta-

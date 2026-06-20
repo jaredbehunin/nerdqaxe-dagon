@@ -1,9 +1,13 @@
 # NerdQAxe-Dagon
 
-A **Mehrunes Dagon** themed firmware for the **NerdQAxe++** (BM1370) Bitcoin solo
-miner — an Elder Scrolls / Oblivion molten-fire aesthetic with an animated lava
-sigil-altar mining screen, lifetime "Time in Oblivion" uptime tracking, and a
-block-found climax overlay.
+A **Mehrunes-Dagon-adjacent** themed firmware for the **NerdQAxe++** (BM1370)
+Bitcoin solo miner — an Oblivion-like molten-fire aesthetic with an animated lava
+sigil-altar mining screen, a lifetime uptime counter (labeled `TIME IN OBLIVION`
+on the device), and a block-found climax overlay.
+
+> This is an independent fan project *inspired by* the look and feel of
+> *The Elder Scrolls IV: Oblivion* — not affiliated with or endorsed by its
+> rights holders. See [License](#license).
 
 ![Dagon mining screen](blog/img/dashboard.png)
 
@@ -30,8 +34,8 @@ The path here was the hard way:
 3. **Rebuilt from upstream source** and fixed the display: ST7796 driver,
    480×320 geometry, BGR order, and the `LV_COLOR_16_SWAP` / big-endian RGB565
    byte-order fix (the "everything is blue" bug).
-4. **Added** the Mehrunes Dagon theme and the persistent "Time in Oblivion"
-   uptime tracking on top.
+4. **Added** the Mehrunes-Dagon-adjacent theme and the persistent uptime
+   counter on top.
 
 The full play-by-play — including the grey-ramp color-debugging trick and the
 brick-recovery commands — is in [`TROUBLESHOOTING.md`](TROUBLESHOOTING.md).
@@ -62,10 +66,10 @@ Board target for this firmware: **`NERDQAXEPLUS2`** (deviceModel `NerdQAxe++`).
 
 - **ST7796 big-screen panel support** — 480×320, correct gap/mirror/byte-order
   (`esp_lcd_st7796`, `LV_COLOR_16_SWAP`, big-endian RGB565 theme assets).
-- **Mehrunes Dagon mining screen** — animated lava sigil-altar, themed gold stat
-  corners (hashrate / temp / best / efficiency), molten framing and runes.
-- **Time in Oblivion** — lifetime cumulative uptime, persisted in NVS across
-  reboots and reconnects.
+- **Mehrunes-Dagon-adjacent mining screen** — animated lava sigil-altar, themed
+  gold stat corners (hashrate / temp / best / efficiency), molten framing and runes.
+- **Lifetime uptime counter** (labeled `TIME IN OBLIVION` on the device) —
+  cumulative uptime, persisted in NVS across reboots and reconnects.
 - **Block-found climax** — a full-screen "SIGIL FOUND" overlay when a block is
   solved; blocks count persists in NVS.
 
@@ -153,5 +157,11 @@ lineage, newest to oldest:
 ## License
 
 Licensed under **GPLv3** ([`LICENSE`](LICENSE)), same as upstream — it cannot be
-relicensed. *Mehrunes Dagon* and *Oblivion* are trademarks of ZeniMax/Bethesda;
-this is an unaffiliated fan aesthetic, no endorsement implied.
+relicensed.
+
+This is an independent, unaffiliated fan project whose visual theme is merely
+*inspired by* / *adjacent to* the aesthetic of *The Elder Scrolls IV: Oblivion*.
+*The Elder Scrolls*, *Oblivion*, and *Mehrunes Dagon* are trademarks of ZeniMax
+Media / Bethesda Softworks. This project is not affiliated with, sponsored by, or
+endorsed by them, and ships no assets from their games — all art here is
+original. Trademark names are used only nominatively to describe the inspiration.

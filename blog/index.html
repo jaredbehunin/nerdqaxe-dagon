@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Summoning a Sigil — Turning a NerdQAxe++ into a Mehrunes Dagon Mining Altar</title>
+<title>Summoning a Sigil — Turning a NerdQAxe++ into a Mehrunes-Dagon-Adjacent Mining Altar</title>
 <style>
   :root{
     --obsidian:#0a0605; --panel:#140c0a; --panel2:#1b110d;
@@ -85,14 +85,14 @@
 <header class="hero">
   <div class="kicker">Build Log</div>
   <h1>Summoning a Sigil</h1>
-  <p class="sub">How a stock NerdQAxe++ Bitcoin miner — bricked, debugged, and rebuilt from source — became a living Mehrunes Dagon altar.</p>
+  <p class="sub">How a stock NerdQAxe++ Bitcoin miner — bricked, debugged, and rebuilt from source — became a living, Mehrunes-Dagon-adjacent altar.</p>
   <div class="byline">Hardware: NerdQAxe++ (4× BM1370) &nbsp;·&nbsp; 3.5″ 480×320 ST7796 &nbsp;·&nbsp; Custom ESP-Miner firmware</div>
 </header>
 
 <div class="wrap">
 
 <section>
-  <p class="lead">It started as a small solo Bitcoin miner in a box and ended as a glowing Oblivion gate that streams molten lava, counts the hours it has spent in the abyss, and — should it ever beat astronomical odds — flares to life screaming <em>SIGIL FOUND</em>. This is the whole journey: every brick, every wrong color, and every line of custom firmware.</p>
+  <p class="lead">It started as a small solo Bitcoin miner in a box and ended as a glowing, Oblivion-like gate that streams molten lava, counts the hours it has spent in the abyss, and — should it ever beat astronomical odds — flares to life screaming <em>SIGIL FOUND</em>. This is the whole journey: every brick, every wrong color, and every line of custom firmware.</p>
 </section>
 
 <section>
@@ -147,19 +147,19 @@
 
 <section>
   <h2><span class="num">04</span>Designing the altar</h2>
-  <p>With the canvas working, the fun began. The brief: <em>Mehrunes Dagon</em> — the Elder Scrolls Daedric prince of destruction. Molten red and orange, Daedric runes, Oblivion fire.</p>
+  <p>With the canvas working, the fun began. The brief: a look <em>inspired by</em> Mehrunes Dagon — a Daedric prince of destruction. Molten red and orange, Daedric-style runes, Oblivion-like fire.</p>
   <p>The first pass was a procedural mockup — title, glowing hashrate, rune-framed stat panels — rendered at the exact 480×320 panel size so the layout could be judged before touching the device.</p>
   <figure><img src="img/mockup-procedural.png" alt="First procedural Dagon mockup"><figcaption>Mockup v1 — procedural molten dashboard. Good bones, but it wanted real art.</figcaption></figure>
 
   <h3>From a flat dashboard to a place</h3>
-  <p>A cinematic Oblivion deadlands scene became the next direction — black spires, a blood-red sun, rivers of lava — fitted to the screen with translucent panels so the stats stayed readable.</p>
+  <p>A cinematic, Oblivion-like deadlands scene became the next direction — black spires, a blood-red sun, rivers of lava — fitted to the screen with translucent panels so the stats stayed readable.</p>
   <div class="grid">
-    <figure><img src="img/ref-lava-plains.png" alt="Lava plains reference art"><figcaption>Reference: the Oblivion deadlands.</figcaption></figure>
+    <figure><img src="img/ref-lava-plains.png" alt="Lava plains reference art"><figcaption>Reference: Oblivion-like deadlands.</figcaption></figure>
     <figure><img src="img/theme-lavafields.png" alt="Lava fields theme preview"><figcaption>That scene as a working dashboard.</figcaption></figure>
   </div>
 
   <h3>The Sigil Stone</h3>
-  <p>Then the real idea landed: don't use a landscape — make the centerpiece a <em>living Sigil Stone</em>, the molten heart of an Oblivion gate, suspended on an obsidian altar with lava streaming through it.</p>
+  <p>Then the real idea landed: don't use a landscape — make the centerpiece a <em>living Sigil Stone</em>, the molten heart of an Oblivion-like gate, suspended on an obsidian altar with lava streaming through it.</p>
   <div class="grid">
     <figure><img src="img/ref-sigil-altar.png" alt="Sigil altar reference"><figcaption>The reference: a sigil-stone altar.</figcaption></figure>
     <figure><img src="img/altar-idle.png" alt="Altar fitted to the panel"><figcaption>Fitted to 480×320 as the mining screen.</figcaption></figure>
@@ -207,15 +207,19 @@
   <p>From a bricked box to a fully custom, source-built mining altar:</p>
   <table class="specs">
     <tr><td>Panel fix</td><td>480×320 ST7796 driver, correct geometry &amp; color pipeline</td></tr>
-    <tr><td>Theme</td><td>Mehrunes Dagon sigil altar, hand-fitted to the panel</td></tr>
+    <tr><td>Theme</td><td>Mehrunes-Dagon-adjacent sigil altar, hand-fitted to the panel</td></tr>
     <tr><td>Animation</td><td>upward lava + downward floor reflection, looping</td></tr>
     <tr><td>Custom data</td><td>TIME IN OBLIVION + lifetime accepted shares (NVS-persisted)</td></tr>
     <tr><td>Boot</td><td>"SUMMONING THE SIGIL…" → solid load → stats fade in</td></tr>
     <tr><td>Block event</td><td>full-screen SIGIL FOUND climax</td></tr>
     <tr><td>Tuning</td><td>500–800 MHz range exposed, auto-fan + thermal cap</td></tr>
   </table>
-  <p>It mines solo to its owner's wallet, stable and cool, and waits in the dark — counting its time in Oblivion.</p>
+  <p>It mines solo to its owner's wallet, stable and cool, and waits in the dark — counting its time in oblivion.</p>
 </section>
+
+<footer style="margin-top:3rem;padding-top:1.5rem;border-top:1px solid #3a2418;font-size:.8rem;opacity:.7">
+  <p>This is an independent, unaffiliated fan project. Its theme is merely <em>inspired by</em> / <em>adjacent to</em> the aesthetic of <em>The Elder Scrolls IV: Oblivion</em>; all art shown is original and no game assets are used. <em>The Elder Scrolls</em>, <em>Oblivion</em>, and <em>Mehrunes Dagon</em> are trademarks of ZeniMax Media / Bethesda Softworks, used here only nominatively to describe the inspiration. Not affiliated with, sponsored by, or endorsed by them.</p>
+</footer>
 
 </div>
 
