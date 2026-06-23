@@ -53,11 +53,96 @@ $nb-themes: nb-register-theme((
 
   select-min-width: 6rem,
 
-  slide-out-background: #252547,
-  slide-out-shadow-color: 2px 0 3px #29157a,
-  slide-out-shadow-color-rtl: -2px 0 3px #29157a,
-  gauge-bg: #304562,
-  gauge-value-color: #64B5F6,
+  // ─────────────────────────────────────────────────────────────────────────
+  // OBLIVION GATE palette — Deadlands ash + gate-fire. (nerdqaxe-dagon reskin)
+  // Ash grey-green ground, gate-fire orange primary, sigil-red danger,
+  // sickly-brass warning. Mirrors the on-device Dagon theme's dark floor.
+  // ─────────────────────────────────────────────────────────────────────────
+
+  // Neutral ramp — ashen grey-green
+  color-basic-100: #f3ecd9,
+  color-basic-200: #e4dcc4,
+  color-basic-300: #c9c0a3,
+  color-basic-400: #9b9476,
+  color-basic-500: #6f6a50,
+  color-basic-600: #4a4634,
+  color-basic-700: #353123,
+  color-basic-800: #26241a,
+  color-basic-900: #1c1b13,
+  color-basic-1000: #14130e,
+  color-basic-1100: #0e0d09,
+
+  // Primary — gate-fire orange
+  color-primary-100: #ffe7d4,
+  color-primary-200: #ffc6a1,
+  color-primary-300: #ff9f63,
+  color-primary-400: #ff8538,
+  color-primary-500: #ff6b1a,
+  color-primary-600: #e35513,
+  color-primary-700: #bd400d,
+  color-primary-800: #962f0a,
+  color-primary-900: #6f2107,
+  color-primary-transparent-100: rgba(255, 107, 26, 0.08),
+  color-primary-transparent-200: rgba(255, 107, 26, 0.16),
+  color-primary-transparent-300: rgba(255, 107, 26, 0.24),
+  color-primary-transparent-400: rgba(255, 107, 26, 0.32),
+  color-primary-transparent-500: rgba(255, 107, 26, 0.40),
+  color-primary-transparent-600: rgba(255, 107, 26, 0.48),
+
+  // Danger — sigil red
+  color-danger-100: #f7d2c8,
+  color-danger-200: #eda08e,
+  color-danger-300: #e07058,
+  color-danger-400: #d44e30,
+  color-danger-500: #c4361a,
+  color-danger-600: #a32811,
+  color-danger-700: #821e0c,
+  color-danger-800: #5f1408,
+  color-danger-900: #420d05,
+
+  // Warning — sickly brass / ember amber
+  color-warning-300: #e6cf6b,
+  color-warning-400: #d3b94f,
+  color-warning-500: #c9a83f,
+  color-warning-600: #a8862c,
+  color-warning-700: #86691f,
+
+  // Info / success kept in-world (brass-green) so accents never go stock-blue
+  color-info-500: #b8a13f,
+  color-success-500: #7e8a3a,
+
+  // Semantic surfaces — dark ash floor
+  background-basic-color-1: #26241a,
+  background-basic-color-2: #1f1d15,
+  background-basic-color-3: #181610,
+  background-basic-color-4: #14130e,
+
+  border-basic-color-1: #2b2920,
+  border-basic-color-2: #353123,
+  border-basic-color-3: #423e2f,
+  border-basic-color-4: #4a4634,
+  border-basic-color-5: #5f5a45,
+
+  text-basic-color: #ece4d0,
+  text-alternate-color: #14130e,
+  text-control-color: #14130e,
+  text-hint-color: #9a9162,
+  text-disabled-color: rgba(236, 228, 208, 0.4),
+
+  card-background-color: #221f17,
+  card-text-color: #ece4d0,
+  card-border-color: #353123,
+
+  header-background-color: #18160f,
+  header-text-color: #ff6b1a,
+
+  shadow: 0 0 14px 0 rgba(255, 107, 26, 0.10),
+
+  slide-out-background: #18160f,
+  slide-out-shadow-color: 2px 0 8px rgba(196, 54, 26, 0.45),
+  slide-out-shadow-color-rtl: -2px 0 8px rgba(196, 54, 26, 0.45),
+  gauge-bg: #2b291e,
+  gauge-value-color: #ff6b1a,
 ), cosmic, cosmic);
 
 $nb-themes: nb-register-theme((

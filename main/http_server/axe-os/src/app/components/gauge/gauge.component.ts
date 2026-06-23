@@ -62,14 +62,14 @@ import { Component, Input } from '@angular/core';
 
       .gauge-bg {
         fill: none;
-        stroke: var(--gauge-bg, #304562);
+        stroke: var(--gauge-bg, #2b291e);
         stroke-width: 14;
         opacity: 0.45;
       }
 
       .gauge-value {
         fill: none;
-        stroke: var(--gauge-stroke, #2d8ad7);
+        stroke: var(--gauge-stroke, #ff6b1a);
         stroke-width: 14;
         transition: stroke-dashoffset 0.5s ease-in-out, stroke 0.2s ease-in-out;
       }
@@ -113,9 +113,9 @@ export class GaugeComponent {
   @Input() warn?: number; // orange threshold
   @Input() crit?: number; // red threshold
 
-  @Input() okColor: string = '#2d8ad7';   // default blue
-  @Input() warnColor: string = '#f59e0b'; // orange
-  @Input() critColor: string = '#ef4444'; // red
+  @Input() okColor: string = '#ff6b1a';   // gate-fire (Oblivion Gate)
+  @Input() warnColor: string = '#c9a83f'; // sickly brass
+  @Input() critColor: string = '#c4361a'; // sigil red
 
   radius: number = 40; // Radius of the circle
   center: number = 50; // Center of the circle

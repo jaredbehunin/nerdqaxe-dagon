@@ -103,3 +103,95 @@ mat-icon{
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+/* ════════════════════════════════════════════════════════════════════════
+   OBLIVION GATE — Dagon reskin global flourishes (nerdqaxe-dagon)
+   Palette lives in ./themes.scss (Nebular cosmic override). This adds the
+   chrome the theme map can't: glow, engraved type, vignette, scrollbar.
+   Asset-free (no bundled fonts) to respect the 3 MB www budget.
+   ════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --dagon-fire:  #ff6b1a;   /* gate-fire */
+  --dagon-ember: #ff8538;   /* lighter ember */
+  --dagon-sigil: #c4361a;   /* sigil red */
+  --dagon-brass: #c9a83f;   /* sickly brass */
+  --dagon-bone:  #ece4d0;   /* bleached bone text */
+  --dagon-floor: #14130e;   /* dark floor (never true black — panel-safe habit) */
+}
+
+/* Page floor: ashen gate-glow vignette instead of a flat fill. */
+body {
+  background-color: var(--dagon-floor);
+  background-image:
+    radial-gradient(120% 80% at 50% -10%, rgba(255, 107, 26, 0.10) 0%, rgba(255, 107, 26, 0) 55%),
+    radial-gradient(90% 60% at 50% 115%, rgba(196, 54, 26, 0.08) 0%, rgba(196, 54, 26, 0) 60%);
+  background-attachment: fixed;
+}
+
+/* Headings → engraved-tome serif (system stack, no webfont download). */
+h1, h2, h3, h4, h5, h6,
+nb-card-header,
+.pool-summary-square__best-label,
+.power-watt-box__label-top,
+.heat-metric-box__label-top {
+  font-family: "Cinzel", "Trajan Pro", "Palatino Linotype", "Book Antiqua",
+               Georgia, "Times New Roman", serif !important;
+  letter-spacing: 0.04em;
+}
+
+/* Signature readouts — hashrate / best / efficiency / ASIC °C — smoulder. */
+.pool-summary-square__hashrate-value,
+.pool-summary-square__best-value,
+.power-watt-box__value,
+.heat-metric-box__value,
+.heat-asic-main .heat-metric-box__value {
+  color: var(--dagon-bone);
+  text-shadow:
+    0 0 6px rgba(255, 107, 26, 0.45),
+    0 0 18px rgba(255, 107, 26, 0.22);
+}
+
+.pool-summary-square__hashrate-unit,
+.pool-summary-square__best-value .unit {
+  color: var(--dagon-ember);
+}
+
+/* Cards: faint molten rim + depth, lifted off the floor. */
+nb-card {
+  border: 1px solid rgba(255, 107, 26, 0.14) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 107, 26, 0.06) inset,
+    0 6px 22px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Sidebar menu: active/hover item burns gate-fire with a left ember bar. */
+nb-menu .menu-item a.active,
+nb-menu .menu-item a:hover {
+  color: var(--dagon-fire) !important;
+}
+nb-menu .menu-item a.active {
+  box-shadow: inset 3px 0 0 0 var(--dagon-fire);
+  background: rgba(255, 107, 26, 0.06);
+}
+
+/* Primary buttons: forged, not flat. */
+button[nbButton][status="primary"] {
+  background-image: linear-gradient(180deg, var(--dagon-ember) 0%, var(--dagon-fire) 60%, #e35513 100%);
+  border-color: #bd400d;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+/* Scrollbar in the Deadlands palette. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #4a4634 var(--dagon-floor);
+}
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: var(--dagon-floor); }
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4a4634, #2b2920);
+  border-radius: 6px;
+  border: 2px solid var(--dagon-floor);
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--dagon-fire); }

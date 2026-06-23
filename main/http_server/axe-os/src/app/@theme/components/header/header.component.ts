@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private sidebarState: 'expanded' | 'compact' | 'collapsed' = 'expanded';
 
   themes = [
-    { value: 'cosmic',  name: 'Default' },
+    { value: 'cosmic',  name: 'Oblivion Gate' },
     { value: 'default', name: 'Light' },
     { value: 'dark',    name: 'Dark' },
   ];

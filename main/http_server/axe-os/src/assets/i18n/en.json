@@ -24,19 +24,19 @@
     "SHUTDOWN": "Miner has been shut down."
   },
   "NAVIGATION": {
-    "HOME": "Home",
-    "DASHBOARD": "Dashboard",
-    "SETTINGS": "Settings",
-    "SYSTEM": "System",
-    "SWARM": "Swarm",
+    "HOME": "Altar",
+    "DASHBOARD": "Altar",
+    "SETTINGS": "Rites",
+    "SYSTEM": "Sigil",
+    "SWARM": "Legion",
     "INFLUXDB": "InfluxDB",
-    "ALERTS": "Alerts",
-    "SECURITY": "Security"
+    "ALERTS": "Omens",
+    "SECURITY": "Wards"
   },
   "HOME": {
     "HASH_RATE": "Hash Rate",
     "HASH_RATE_TOOLTIP": "Hash rate reported by the ASICs.",
-    "HASH_RATE_CHART": "Nerd* Chart",
+    "HASH_RATE_CHART": "Sigil Chart",
     "HASHRATE_ESTIMATED": "Hash rate estimated by found shares.",
     "SHARES": "Shares",
     "POWER": "Power Usage",
@@ -44,7 +44,7 @@
     "ALL_TIME_BEST": "all-time best",
     "TEMPERATURE": "Temperature",
     "FAN_SPEED": "Fan",
-    "UPTIME": "Uptime",
+    "UPTIME": "Time in Oblivion",
     "EXPECTED": "expected",
     "ACCEPTED": "Accepted",
     "REJECTED": "Rejected",
@@ -134,7 +134,7 @@
     "FALLBACK": "Fallback"
   },
   "SETTINGS": {
-    "TITLE": "Settings",
+    "TITLE": "Rites",
     "POOL_SETTINGS": "Pool Settings",
     "WIFI_SETTINGS": "WiFi Settings",
     "MINING_SETTINGS": "Mining Settings",
@@ -186,7 +186,7 @@
     "SWAP_POOLS": "Swap pools"
   },
   "SYSTEM": {
-    "TITLE": "System Information",
+    "TITLE": "The Sigil — System",
     "OVERVIEW": "Overview",
     "MODEL": "Model",
     "DEVICE_MODEL": "Device Model",
@@ -195,7 +195,7 @@
     "IP_ADDRESS": "IP Address",
     "FREE_HEAP": "Free Heap",
     "FREE_HEAP_MEMORY": "Free Heap Memory",
-    "UPTIME": "Uptime",
+    "UPTIME": "Time in Oblivion",
     "LAST_RESET_REASON": "Last Reset Reason",
     "WIFI_STATUS": "WiFi Status",
     "VERSION": "Version",
@@ -249,7 +249,7 @@
     "LOGS_ALREADY_OPEN_OTHER_TAB": "Logs are already open in another tab."
   },
   "SWARM": {
-    "TITLE": "Swarm Management",
+    "TITLE": "The Legion",
     "DEVICES": "Devices",
     "ADD_DEVICE": "Add Device",
     "DEVICE_IP": "Device IP",
@@ -299,7 +299,7 @@
     "SETTINGS_SAVE_FAILED": "Could not save InfluxDB settings."
   },
   "ALERTS": {
-    "TITLE": "Alert Configuration",
+    "TITLE": "Omens",
     "DISCORD_WEBHOOK": "Discord Webhook URL",
     "TEMPERATURE_ALERT": "Temperature Alert",
     "HASHRATE_ALERT": "Hashrate Alert",
@@ -546,7 +546,7 @@
     "SECOND_PLURAL": "seconds"
   },
   "SECURITY": {
-    "TITLE": "Security",
+    "TITLE": "Wards",
     "OTP_STATUS": "OTP status",
     "ENABLE_OTP": "Enable OTP",
     "DISABLE_OTP": "Disable OTP",
