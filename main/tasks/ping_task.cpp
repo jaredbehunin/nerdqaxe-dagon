@@ -102,7 +102,10 @@ PingResult PingTask::perform_ping(const char *ip_str, const char *hostname_str)
         return result;
     }
 
-    PingStats stats{};
+    // Reset and use the member (not a stack local) so the pointer handed to the
+    // ping callback stays valid even if a reply lands during/after teardown.
+    m_stats = PingStats{};
+    PingStats &stats = m_stats;
     stats.hostname = hostname_str;
     stats.min_rtt = 1e6;
     stats.tag = m_tag;
@@ -134,8 +137,11 @@ PingResult PingTask::perform_ping(const char *ip_str, const char *hostname_str)
         return result;
     }
 
-    // Wait until all replies are received or timeout expires
-    const int max_wait_ms = PING_COUNT * (PING_TIMEOUT_MS + 100);
+    // Wait until all replies are received or timeout expires. Must comfortably
+    // exceed a full round (count * (interval + per-request timeout)) plus slack,
+    // so on a lossy link we don't stop+delete the session while a reply is still
+    // pending and about to fire the callback.
+    const int max_wait_ms = PING_COUNT * (PING_INTERVAL_MS + PING_TIMEOUT_MS) + 2000;
     int wait = 0;
     uint32_t replies = 0, sent = 0;
 

@@ -40,6 +40,11 @@ class PingTask {
     int m_history_count = 0;
     const char* m_tag = nullptr;
     StratumManager *m_manager = nullptr;
+    // Shared with the esp_ping success callback. Must NOT be a stack local in
+    // perform_ping(): a late callback firing after the function returns would
+    // read freed stack (dangling tag -> LoadStoreError). The PingTask object
+    // outlives every ping session, so this pointer is always valid.
+    PingStats m_stats{};
 
     void record_ping_result(uint16_t sent, uint16_t received);
     int init_ping_history();
