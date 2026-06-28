@@ -73,9 +73,25 @@ class MiningInfoV1 : public MiningInfoBase {
 
     bm_job* buildBmJob(uint32_t extranonce_2, int pool_id, uint32_t asic_diff) override
     {
+        // extranonce_2_len is pool-controlled; a bogus value would size the VLA
+        // below out of bounds and overflow the stack. Standard stratum uses 4-8
+        // bytes; clamp so a malformed pool message can never blow the stack.
+        int en2_len = extranonce_2_len;
+        if (en2_len < 1 || en2_len > 16) {
+            ESP_LOGE(TAG, "invalid extranonce_2_len %d, clamping", extranonce_2_len);
+            en2_len = (en2_len < 1) ? 4 : 16;
+        }
+
+        // a dropped/incomplete notify can leave the job without coinbase/enonce;
+        // don't strlen() a NULL.
+        if (!current_job->coinbase_1 || !current_job->coinbase_2 || !extranonce_str) {
+            ESP_LOGW(TAG, "buildBmJob: incomplete job, skipping");
+            return nullptr;
+        }
+
         // generate extranonce2 hex string
-        char extranonce_2_str[extranonce_2_len * 2 + 1]; // +1 zero termination
-        snprintf(extranonce_2_str, sizeof(extranonce_2_str), "%0*lx", (int) extranonce_2_len * 2, (unsigned long) extranonce_2);
+        char extranonce_2_str[en2_len * 2 + 1]; // +1 zero termination
+        snprintf(extranonce_2_str, sizeof(extranonce_2_str), "%0*lx", en2_len * 2, (unsigned long) extranonce_2);
 
         // generate coinbase tx
         int coinbase_tx_len = strlen(current_job->coinbase_1) + strlen(extranonce_str) + strlen(extranonce_2_str) +
@@ -92,6 +108,10 @@ class MiningInfoV1 : public MiningInfoBase {
 
         // we need malloc because we will save it in the job array
         bm_job *next_job = (bm_job *) MALLOC(sizeof(bm_job));
+        if (!next_job) {
+            ESP_LOGE(TAG, "buildBmJob: out of memory");
+            return nullptr;
+        }
         construct_bm_job(current_job, merkle_root, version_mask, next_job);
         next_job->jobid = strdup(current_job->job_id);
         next_job->extranonce2 = strdup(extranonce_2_str);
@@ -358,6 +378,12 @@ void create_jobs_task(void *pvParameters)
             uint32_t asic_diff = STRATUM_MANAGER->selectAsicDiff(active_pool, mi->getActiveDifficulty());
             next_job = mi->buildBmJob(extranonce_2, active_pool, asic_diff);
         } // mutex
+
+        // buildBmJob declines incomplete/corrupt jobs; don't deref null.
+        if (!next_job) {
+            ESP_LOGW(TAG, "(%s) no job built, skipping", active_pool_str);
+            continue;
+        }
 
         // set asic difficulty
         asics->setJobDifficultyMask(next_job->asic_diff);

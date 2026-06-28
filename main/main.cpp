@@ -48,7 +48,10 @@
 #include "network/mdns_service.h"
 #include "network/network_manager.h"
 
-#define STRATUM_WATCHDOG_TIMEOUT_SECONDS 3600
+// Was 3600 (1h): on a lossy pool link a share-ACK gap under an hour could trip
+// the task watchdog and reset. Matches upstream #583 (7 days) — the panic guards
+// in stratum_api/create_jobs_task are the real reconnect-robustness fix.
+#define STRATUM_WATCHDOG_TIMEOUT_SECONDS 604800
 
 System SYSTEM_MODULE;
 

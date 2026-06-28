@@ -197,18 +197,46 @@ bool StratumApi::parseMethods(JsonDocument &doc, const char *method_str, Stratum
     switch (message->method) {
     case MINING_NOTIFY: {
         ESP_LOGI(TAG, "mining notify");
-        mining_notify *new_work = (mining_notify *) MALLOC(sizeof(mining_notify));
 
         JsonArray params = doc["params"].as<JsonArray>();
 
-        new_work->job_id = strdup(params[0].as<const char *>());
-        hex2bin(params[1].as<const char *>(), new_work->_prev_block_hash, HASH_SIZE);
+        // A well-formed mining.notify carries 9 params (indices 0..8). On a lossy
+        // link a truncated/corrupt line can still parse as JSON while missing
+        // fields or carrying nulls; feeding those to strdup()/strtoul()/hex2bin()
+        // dereferences NULL and panics the chip. Validate everything first.
+        if (params.isNull() || params.size() < 8) {
+            ESP_LOGE(TAG, "mining.notify: malformed params (size=%d), dropping",
+                     params.isNull() ? -1 : (int) params.size());
+            return false;
+        }
 
-        new_work->coinbase_1 = strdup(params[2].as<const char *>());
-        new_work->coinbase_2 = strdup(params[3].as<const char *>());
+        const char *p_job_id   = params[0].as<const char *>();
+        const char *p_prevhash = params[1].as<const char *>();
+        const char *p_coinb1   = params[2].as<const char *>();
+        const char *p_coinb2   = params[3].as<const char *>();
+        const char *p_version  = params[5].as<const char *>();
+        const char *p_nbits    = params[6].as<const char *>();
+        const char *p_ntime    = params[7].as<const char *>();
+        if (!p_job_id || !p_prevhash || !p_coinb1 || !p_coinb2 || !p_version || !p_nbits || !p_ntime) {
+            ESP_LOGE(TAG, "mining.notify: null param, dropping job");
+            return false;
+        }
+
+        mining_notify *new_work = (mining_notify *) MALLOC(sizeof(mining_notify));
+        if (!new_work) {
+            ESP_LOGE(TAG, "mining.notify: out of memory");
+            return false;
+        }
+        memset(new_work, 0, sizeof(mining_notify)); // keep freeMiningNotify safe on early-out
+
+        new_work->job_id = strdup(p_job_id);
+        hex2bin(p_prevhash, new_work->_prev_block_hash, HASH_SIZE);
+
+        new_work->coinbase_1 = strdup(p_coinb1);
+        new_work->coinbase_2 = strdup(p_coinb2);
 
         JsonArray merkle_branch = params[4].as<JsonArray>();
-        new_work->n_merkle_branches = merkle_branch.size();
+        new_work->n_merkle_branches = merkle_branch.isNull() ? 0 : merkle_branch.size();
         if (new_work->n_merkle_branches > MAX_MERKLE_BRANCHES) {
             ESP_LOGE(TAG, "Too many Merkle branches.");
             freeMiningNotify(new_work);
@@ -217,12 +245,19 @@ bool StratumApi::parseMethods(JsonDocument &doc, const char *method_str, Stratum
         }
 
         for (size_t i = 0; i < new_work->n_merkle_branches; i++) {
-            hex2bin(merkle_branch[i].as<const char *>(), new_work->_merkle_branches[i], HASH_SIZE);
+            const char *mb = merkle_branch[i].as<const char *>();
+            if (!mb) {
+                ESP_LOGE(TAG, "mining.notify: null merkle branch, dropping job");
+                freeMiningNotify(new_work);
+                safe_free(new_work);
+                return false;
+            }
+            hex2bin(mb, new_work->_merkle_branches[i], HASH_SIZE);
         }
 
-        new_work->version = strtoul(params[5].as<const char *>(), NULL, 16);
-        new_work->target = strtoul(params[6].as<const char *>(), NULL, 16);
-        new_work->ntime = strtoul(params[7].as<const char *>(), NULL, 16);
+        new_work->version = strtoul(p_version, NULL, 16);
+        new_work->target = strtoul(p_nbits, NULL, 16);
+        new_work->ntime = strtoul(p_ntime, NULL, 16);
 
         message->mining_notification = new_work;
 
